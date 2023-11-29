@@ -81,7 +81,7 @@ class Chapter
 
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = getdate($createdAt);
 
         return $this;
     }
@@ -93,7 +93,7 @@ class Chapter
 
     public function setUpdatedAt(\DateTimeInterface $UpdatedAt): static
     {
-        $this->UpdatedAt = $UpdatedAt;
+        $this->UpdatedAt = getdate($UpdatedAt);
 
         return $this;
     }
