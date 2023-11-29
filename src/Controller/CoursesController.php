@@ -9,9 +9,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class CoursesController extends AbstractController
 {
     #[Route('/courses', name: 'app_courses')]
-    public function index(): Response
+    public function ShowCourses(): Response
     {
         return $this->render('courses/index.html.twig', [
+            'controller_name' => 'CoursesController',
+        ]);
+    }
+    #[Route('/categories', name: 'app_courses')]
+    public function ShowCategories(): Response
+    {
+        return $this->render('courses/categorieIndex.html.twig', [
             'controller_name' => 'CoursesController',
         ]);
     }
