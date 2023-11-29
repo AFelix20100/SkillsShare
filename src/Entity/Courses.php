@@ -37,13 +37,12 @@ class Courses
     #[ORM\OneToMany(mappedBy: 'courses', targetEntity: Chapter::class, orphanRemoval: true)]
     private Collection $Chapter;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'courses')]
-    private Collection $categories;
+    #[ORM\ManyToOne(inversedBy: 'courses')]
+    private ?Category $category = null;
 
     public function __construct()
     {
         $this->Chapter = new ArrayCollection();
-        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,29 +152,14 @@ class Courses
         return $this;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getCategories(): Collection
+    public function getCategory(): ?Category
     {
-        return $this->categories;
+        return $this->category;
     }
 
-    public function addCategory(Category $category): static
+    public function setCategory(?Category $category): static
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->addCourse($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): static
-    {
-        if ($this->categories->removeElement($category)) {
-            $category->removeCourse($this);
-        }
+        $this->category = $category;
 
         return $this;
     }
