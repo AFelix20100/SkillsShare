@@ -98,5 +98,11 @@
         "symfony/phpunit-bridge": "^6.3",
         "symfony/stopwatch": "6.3.*",
         "symfony/web-profiler-bundle": "6.3.*"
+    },
+    "repositories": {
+        "data-migration-tool": {
+            "type": "git",
+            "url": "https://github.com/magento/data-migration-tool"
+        }
     }
 }
