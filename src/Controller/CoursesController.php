@@ -15,7 +15,7 @@ class CoursesController extends AbstractController
             'controller_name' => 'CoursesController',
         ]);
     }
-    #[Route('/categories', name: 'app_courses')]
+    #[Route('/categories', name: 'app_categories')]
     public function ShowCategories(): Response
     {
         return $this->render('courses/categorieIndex.html.twig', [
