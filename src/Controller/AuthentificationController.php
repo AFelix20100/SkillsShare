@@ -16,6 +16,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 
 class AuthentificationController extends AbstractController
 {
+
     #[Route('/register', name: 'app_register')]
     public function register(Security $security, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
