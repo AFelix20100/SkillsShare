@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ChapterFormType;
 use App\Entity\Chapter;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,13 +20,20 @@ class ChapterController extends AbstractController
     }
 
     #[Route('/chapter/new', name: "new_chapter")]
-    public function new(): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $chapter = new Chapter();
-        $form = $this->createFormBuilder($chapter)
-        ->add('titre', TextType::class)
-        ->add('Video URL', TextType::class)
-        ->add('contenu', TextType::class);
+        // $chapter->setCreatedAt(new DateTime("now"));
+        $form = $this->createForm(ChapterFormType::class, $chapter);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $chapter->$form->getData();
+        }
+
+        $entityManager->persist($chapter);
+        $entityManager->flush();
+
         return $this->render('chapter/index.html.twig', [
             'controller_name' => 'ChapterController',
         ]);
