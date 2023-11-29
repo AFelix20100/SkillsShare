@@ -29,6 +29,10 @@ class Chapter
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $UpdatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Chapter')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Courses $courses = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class Chapter
     public function setUpdatedAt(\DateTimeInterface $UpdatedAt): static
     {
         $this->UpdatedAt = $UpdatedAt;
+
+        return $this;
+    }
+
+    public function getCourses(): ?Courses
+    {
+        return $this->courses;
+    }
+
+    public function setCourses(?Courses $courses): static
+    {
+        $this->courses = $courses;
 
         return $this;
     }
