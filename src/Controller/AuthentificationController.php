@@ -13,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AuthentificationController extends AbstractController
 {
@@ -63,6 +64,7 @@ class AuthentificationController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/logout', name: 'app_logout', methods: ['GET'])]
     public function logout(): never
     {

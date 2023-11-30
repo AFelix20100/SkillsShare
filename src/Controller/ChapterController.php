@@ -7,6 +7,8 @@ use App\Entity\Chapter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 class ChapterController extends AbstractController
 {
@@ -18,6 +20,7 @@ class ChapterController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_ENSEIGNANT")]
     #[Route('/chapter/new', name: "new_chapter")]
     public function new(): Response
     {

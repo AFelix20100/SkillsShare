@@ -23,11 +23,11 @@ class Chapter
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: Types::DATETIME)]
+    private ?\DateTime $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $UpdatedAt = null;
+    #[ORM\Column(type: Types::DATETIME)]
+    private ?\DateTime $UpdatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'Chapter')]
     #[ORM\JoinColumn(nullable: false)]
@@ -74,24 +74,24 @@ class Chapter
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTime $createdAt): static
     {
         $this->createdAt = getdate($createdAt);
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->UpdatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $UpdatedAt): static
+    public function setUpdatedAt(\DateTime $UpdatedAt): static
     {
         $this->UpdatedAt = getdate($UpdatedAt);
 
