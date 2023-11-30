@@ -12,10 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
 class CoursesController extends AbstractController
 {
+    #[IsGranted("ROLE_USER")]
     #[Route('/courses', name: 'app_courses')]
     public function showCourses(EntityManagerInterface $entityManager): Response
     {
@@ -53,6 +55,7 @@ class CoursesController extends AbstractController
         ]);
     }
    
+    #[IsGranted("ROLE_USER")]
     #[Route('/{id}/view', name: 'app_viewCourses')]
     public function ViewCourses(Courses $course): Response
     {
@@ -62,7 +65,8 @@ class CoursesController extends AbstractController
             "course" => $course,
         ]);
     }
- 
+
+    #[IsGranted("ROLE_USER")]
     #[Route('/categories/{id}', name: 'app_courses_by_category')]
     public function showCoursesByCategory(EntityManagerInterface $entityManager, Category $category): Response
     {
