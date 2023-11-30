@@ -83,8 +83,8 @@ class CoursesFixtures extends Fixture implements DependentFixtureInterface
             $chapter = new Chapter();
             $chapter->setTitle($chapterData[1]);
             $chapter->setContent($chapterData[2]);
-            $chapter->setCreatedAt(new DateTimeImmutable("now"));
-            $chapter->setUpdatedAt(new DateTimeImmutable("now"));
+            $chapter->setCreatedAt(new DateTime("now"));
+            $chapter->setUpdatedAt(new DateTime("now"));
             $chapter->setCourses($course);
             $chapter->setVideoUrl($chapterData[0]);
 
