@@ -2,14 +2,11 @@
   become: yes
   tasks:
     - name: Update APT cache
-      apt:
-        update_cache: yes
+      apt: update_cache=yes
       ignore_errors: yes
 
     - name: Install Ansible's MySQL dependency
-      apt:
-        name: python3-mysqldb
-        state: latest
+      apt: name=python3-mysqldb state=latest
 
     - name: Install common dependencies
       apt:
@@ -20,12 +17,15 @@
           - software-properties-common
           - unzip
           - curl
-        state: latest
 
-    - name: Add PHP repository
-      apt_repository:
-        repo: ppa:ondrej/php
+    - name: Install gnupg for adding PHP repository
+      apt:
+        name:
+          - gnupg
+          - gnupg2
+          - gnupg1
         state: present
+
 
     - name: Install PHP and its extensions
       apt:

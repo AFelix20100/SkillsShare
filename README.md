@@ -90,6 +90,10 @@ $ php bin/console doctrine:fixtures:load
 # Run the project
 $ symfony server:start
 
+#identifiants
+mail : cyril@skillsshare.com
+mdp : cyril
+
 # Le serveur est accessible sur <http://localhost:8000>
 ```
 ## Git ##
