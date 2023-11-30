@@ -47,11 +47,17 @@ class ChapterController extends AbstractController
     public function edit(int $id): Response
     {
 
+        return $this->render('chapter/index.html.twig', [
+            'chapterForm' => $form->createView(),
+        ]);
     }
 
     #[Route('/chapter/delete/{id}', methods: ['DELETE'], name: "delete_chapter")]
     public function delete(int $id): Response
     {
 
+        return $this->render('chapter/index.html.twig', [
+            'chapterForm' => $form->createView(),
+        ]);
     }
 }
