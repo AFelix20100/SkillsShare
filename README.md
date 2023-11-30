@@ -113,9 +113,11 @@ $ sudo docker exec -it <container_id> /bin/bash
 ```
 ## Processus avec Docker ##
 1. Cloner le dépôt Git :
-     Commencez par récupérer le dépôt Git avec la commande git clone --branch <nom_de_la_branche> <URL_du_dépôt>.
+      Commencez par récupérer le dépôt Git avec la commande git clone --branch <nom_de_la_branche> <URL_du_dépôt>.
+   
 2. Transférer le fichier compressé vers le serveur web :
      Une fois le dépôt cloné, transférez le fichier compressé siteweb.zip vers le serveur web.
+   
 3. Décompresser le fichier à la racine du serveur :
      Utilisez la commande $ sudo apt install unzip ensuite $ sudo unzip siteweb.zip -d /home/debian && sudo mv /home/debian/siteweb/* /home/debian/ && sudo rm -r /home/debian/siteweb
  pour extraire le contenu du fichier siteweb.zip dans la racine du système. Assurez-vous d'avoir les permissions nécessaires pour écrire à la racine du système. ensuite rentrer dans le dossier site web et faite la commande.
@@ -124,7 +126,7 @@ $ sudo docker exec -it <container_id> /bin/bash
      Vérifiez que les fichiers apache-config.conf, docker-compose.yml et Dockerfile sont extraits dans le même répertoire (la racine du serveur). Ces fichiers doivent être situés au même endroit pour leur bon fonctionnement.
 	
 5. Lancer Docker avec docker-compose :
-     Utilisez la commande sudo docker-compose up -d pour démarrer les conteneurs définis dans le fichier docker-compose.yml. Assurez-vous d'exécuter cette commande dans le répertoire contenant le fichier docker-compose.yml.
+      Utilisez la commande sudo docker-compose up -d pour démarrer les conteneurs définis dans le fichier docker-compose.yml. Assurez-vous d'exécuter cette commande dans le répertoire contenant le fichier docker-compose.yml.
    
 Ces étapes vous permettront de cloner un dépôt Git, transférer un fichier compressé sur un serveur web, extraire son contenu à la racine du serveur, puis lancer Docker avec docker-compose pour déployer l'application en utilisant les fichiers de configuration appropriés. Assurez-vous de respecter les permissions nécessaires et les chemins appropriés pour que tout fonctionne correctement. 
 
