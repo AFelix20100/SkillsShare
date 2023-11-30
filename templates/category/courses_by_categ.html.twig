@@ -31,14 +31,18 @@
             <div class="row g-3">
                 <div class="col-lg-12 col-md-6">
                     <div class="row g-3">
-                    {% if categories is defined %}
-                        {% for category in categories %}
-                            <div class="col-lg-4 col-md-12 wow zoomIn" data-wow-delay="0.3s">
-                                <a class="position-relative d-block overflow-hidden" href="{{ path('app_courses_by_category',{id: category.id})}}">
-                                    <img class="img-fluid" src="img/cat-2.jpg" alt="">
-                                    <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
-                                        <h5 class="m-0">{{category.label}}</h5>
-                                        <small class="text-primary"></small>
+                    {% if courses is defined %}
+                        {% for course in courses %}
+                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <a href="{{ path('app_viewCourses',{id: course.id})}}">
+                                    <div class="team-item bg-light">
+                                        <div class="overflow-hidden">
+                                            <img class="img-fluid" src="{{course.img}}" alt="">
+                                        </div>
+                                        <div class="text-center p-4">
+                                            <h5 class="mb-0">{{course.title}}</h5>
+                                            <small>{{course.category.label}}</small>
+                                        </div>
                                     </div>
                                 </a>
                             </div>

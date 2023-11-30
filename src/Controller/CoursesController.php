@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Courses;
+use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,6 +28,16 @@ class CoursesController extends AbstractController
         return $this->render('courses/viewIndex.html.twig', 
         [
             "course" => $course,
+        ]);
+    }
+
+    #[Route('/categories/{id}', name: 'app_courses_by_category')]
+    public function showCoursesByCategory(EntityManagerInterface $entityManager, Category $category): Response
+    {
+        $courses = $category->getCourses();
+        return $this->render('category/courses_by_categ.html.twig', 
+        [
+            'courses' => $courses,
         ]);
     }
 }
