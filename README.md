@@ -90,8 +90,60 @@ $ php bin/console doctrine:fixtures:load
 # Run the project
 $ symfony server:start
 
+#identifiants
+mail : cyril@skillsshare.com
+mdp : cyril
+
 # Le serveur est accessible sur <http://localhost:8000>
 ```
+## Git ##
+Pour récupérer une branche spécifique d'un dépôt Git, vous pouvez utiliser la commande git clone suivie de l'option --branch pour spécifier le nom de la branche que vous souhaitez cloner. Voici comment cela se présente :
+commande: git clone --branch <nom_de_la_branche> <URL_du_dépôt>
+
+## Déploiement ## 
+
+## Avec Docker ##
+Docker est une plateforme logicielle qui simplifie le déploiement et la gestion d'applications dans des environnements isolés appelés conteneurs. Ces conteneurs offrent un moyen portable et léger d'emballer des applications avec toutes leurs dépendances, garantissant ainsi une exécution cohérente indépendamment de l'environnement hôte.
+
+Les conteneurs Docker fonctionnent sur la base d'images, des modèles immuables et auto-suffisants qui contiennent le code, les bibliothèques, les outils, et toutes les autres dépendances nécessaires à l'exécution d'une application.
+
+Maintenant, voici quelques commandes essentielles pour travailler avec Docker :
+```bash
+$ sudo docker-compose up 
+# Cette commande lance des services définis dans un fichier docker-compose.yml. Elle crée et démarre des conteneurs en fonction de la configuration spécifiée.
+
+$ sudo docker-compose down
+# Ceci arrête et supprime les conteneurs, les réseaux, les volumes et les images créés par docker-compose up.
+
+$ sudo docker ps 
+# Cette commande affiche les conteneurs actuellement en cours d'exécution avec des informations telles que leur ID, leur nom et leur statut.
+
+$ sudo docker exec -it <container_id> /bin/bash 
+# Vous permet de vous connecter à l'intérieur d'un conteneur en cours d'exécution pour exécuter des commandes ou effectuer des opérations dans son environnement.
+```
+## Processus avec Docker ##
+1. Cloner le dépôt Git :
+   
+   Commencez par récupérer le dépôt Git avec la commande ``` $sudo git clone --branch <nom_de_la_branche> <URL_du_dépôt>```
+   
+3. Transférer le fichier compressé vers le serveur web :
+   
+   Une fois le dépôt cloné, transférez le fichier compressé siteweb.zip vers le serveur web.
+   
+5. Décompresser le fichier à la racine du serveur :
+   
+   Utilisez la commande ``` $sudo apt install unzip``` ensuite ``` $sudo unzip siteweb.zip -d /home/debian && sudo mv /home/debian/siteweb/* /home/debian/ && sudo rm -r /home/debian/siteweb ```
+ pour extraire le contenu du fichier siteweb.zip dans la racine du système. Assurez-vous d'avoir les permissions nécessaires pour écrire à la racine du système. ensuite rentrer dans le dossier site web et faite la commande.
+   
+7. Placer les fichiers spécifiques au bon endroit :
+   
+   Vérifiez que les fichiers apache-config.conf, docker-compose.yml et Dockerfile sont extraits dans le même répertoire (la racine du serveur). Ces fichiers doivent être situés au même endroit pour leur bon fonctionnement.
+	
+8. Lancer Docker avec docker-compose :
+    
+   Utilisez la commande ``` $sudo docker-compose up -d``` pour démarrer les conteneurs définis dans le fichier docker-compose.yml. Assurez-vous d'exécuter cette commande dans le répertoire contenant le fichier docker-compose.yml. ( ``` $sudo docker-compose down ``` pour arreter les conteneurs) 
+   
+Ces étapes vous permettront de cloner un dépôt Git, transférer un fichier compressé sur un serveur web, extraire son contenu à la racine du serveur, puis lancer Docker avec docker-compose pour déployer l'application en utilisant les fichiers de configuration appropriés. Assurez-vous de respecter les permissions nécessaires et les chemins appropriés pour que tout fonctionne correctement. 
 
 ## :memo: License ##
 
@@ -101,5 +153,4 @@ This project is under license from MIT. For more details, see the [LICENSE](LICE
 Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
 
 &#xa0;
-
 <a href="#top">Back to top</a>
