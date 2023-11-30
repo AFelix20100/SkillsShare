@@ -4,20 +4,59 @@
 {# ... #}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	{% if error %}
+		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	{% endif %}
+	<!-- Header Start -->
+	<div class="container-fluid bg-primary py-5 mb-5 page-header">
+		<div class="container py-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-10 text-center">
+					<h1 class="display-3 text-white animated slideInDown">Se connecter</h1>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb justify-content-center">
+							<li class="breadcrumb-item">
+								<a class="text-white" href="{{ path('app_home')}}">Accueil</a>
+							</li>
+							<li class="breadcrumb-item text-white active" aria-current="page">Se Connecter</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Header End -->
 
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}">
+	<div class="container-xxl py-5">
+		<div class="container">
+			<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+				<h6 class="section-title bg-white text-center text-primary px-3">Se connecter</h6>
+				<h1 class="mb-5">Saisissez vos informations</h1>
+				<form action="{{ path('app_login') }}" method="post">
+					<div class="row g-3">
+						<div class="col-md-6">
+							<div class="form-floating">
+								<input type="text" class="form-control" id="username" placeholder="Votre Email" name="_username" value="{{ last_username }}">
+								<label for="email">Votre Email</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-floating">
+								<input type="password" class="form-control" id="password" name="_password" placeholder="Mot de passe">
+								<label for="password">Mot de passe</label>
+							</div>
+						</div>
+						<div class="col-12">
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password">
-
-        {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"> #}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <button type="submit">login</button>
-    </form>
+							<button class="btn btn-primary w-100 py-3" type="submit">Se connecter</button>
+						</div>
+					</div>
+				</form>
+				<div class="mt-2">
+					<a href="{{path('app_register')}}">Vous n'avez pas encore de compte ?</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

@@ -1,19 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+	<!-- Header Start -->
+	<div class="container-fluid bg-primary py-5 mb-5 page-header">
+		<div class="container py-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-10 text-center">
+					<h1 class="display-3 text-white animated slideInDown">Inscription</h1>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb justify-content-center">
+							<li class="breadcrumb-item">
+								<a class="text-white" href="{{ path('app_home')}}">Accueil</a>
+							</li>
+							<li class="breadcrumb-item text-white active" aria-current="page">Inscription</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Header End -->
 
-    {{ form_errors(registrationForm) }}
+	<div class="container-xxl py-5">
+		<div class="container">
+			<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+				<h6 class="section-title bg-white text-center text-primary px-3">Inscription</h6>
+				<h1 class="mb-5">Saisissez vos informations</h1>
+				{{ form_errors(registrationForm) }}
+				{{ form_start(registrationForm) }}
+				<div class="row g-3">
+					<div class="col-md-6">
+						<div class="form-floating">
+							{{ form_widget(registrationForm.email) }}
+							<label for="email">Votre Email</label>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-floating">
+							{{ form_widget(registrationForm.plainPassword)}}
+							<label for="password">Mot de passe</label>
+						</div>
+					</div>
+                    {{ form_row(registrationForm.agreeTerms) }}
+					<div class="col-12">
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+						<button class="btn btn-primary w-100 py-3" type="submit">S'inscrire</button>
+					</div>
+				</div>
+				{{ form_end(registrationForm) }}
+                <div class="mt-2">
+					<a href="{{path('app_login')}}">Vous avez déjà un compte ?</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
 {% endblock %}
