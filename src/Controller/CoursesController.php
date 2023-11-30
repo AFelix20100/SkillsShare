@@ -3,13 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Courses;
-use Doctrine\ORM\EntityManager;
-use App\Repository\CoursesRepository;
+use App\Form\CourseFormType;
+use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 // use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -30,18 +29,18 @@ class CoursesController extends AbstractController
     public function new(EntityManagerInterface $entityManager, Request $request): Response
     {
         $courses = new Courses();
-        $form = $this->createForm(Courses::class, $courses);
+        $form = $this->createForm(CourseFormType::class, $courses);
 
         $form->handleRequest($request);
         
-        dd($courses, $form);
         if($form->isSubmitted() && $form->isValid()) {
             $courses = $form->getData();
+            dd($courses, $form);
 
         }
 
-        return $this->render('courses/index.html.twig', [
-            'controller_name' => 'CoursesController'
+        return $this->render('courses/new.html.twig', [
+            'coursesForm' => $form->createView(),
         ]);
     }
 

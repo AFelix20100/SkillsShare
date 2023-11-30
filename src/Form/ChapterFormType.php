@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ChapterFormType extends AbstractType
 {
@@ -24,6 +24,10 @@ class ChapterFormType extends AbstractType
 
                 // uses the User.username property as the visible option string
                 'choice_label' => 'chapter',
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Envoyer',
+                'attr' => ['envoyer' => 'save']
             ])
         ;
     }
