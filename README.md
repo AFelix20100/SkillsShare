@@ -126,7 +126,7 @@ $ sudo docker exec -it <container_id> /bin/bash
      Vérifiez que les fichiers apache-config.conf, docker-compose.yml et Dockerfile sont extraits dans le même répertoire (la racine du serveur). Ces fichiers doivent être situés au même endroit pour leur bon fonctionnement.
 	
 5. Lancer Docker avec docker-compose :
-      Utilisez la commande sudo docker-compose up -d pour démarrer les conteneurs définis dans le fichier docker-compose.yml. Assurez-vous d'exécuter cette commande dans le répertoire contenant le fichier docker-compose.yml.
+      Utilisez la commande $sudo docker-compose up -d pour démarrer les conteneurs définis dans le fichier docker-compose.yml. Assurez-vous d'exécuter cette commande dans le répertoire contenant le fichier docker-compose.yml. ($sudo docker-compose down pour arreter les conteneurs) 
    
 Ces étapes vous permettront de cloner un dépôt Git, transférer un fichier compressé sur un serveur web, extraire son contenu à la racine du serveur, puis lancer Docker avec docker-compose pour déployer l'application en utilisant les fichiers de configuration appropriés. Assurez-vous de respecter les permissions nécessaires et les chemins appropriés pour que tout fonctionne correctement. 
 
