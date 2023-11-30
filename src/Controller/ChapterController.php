@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Form\ChapterFormType;
 use App\Entity\Chapter;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ChapterController extends AbstractController
@@ -23,19 +25,20 @@ class ChapterController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $chapter = new Chapter();
-        // $chapter->setCreatedAt(new DateTime("now"));
         $form = $this->createForm(ChapterFormType::class, $chapter);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $chapter->$form->getData();
-        }
+            $chapter = $form->getData();
 
-        $entityManager->persist($chapter);
-        $entityManager->flush();
+            $entityManager->persist($chapter);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_chapter');
+         }
 
         return $this->render('chapter/index.html.twig', [
-            'controller_name' => 'ChapterController',
+            'chapterForm' => $form->createView(),
         ]);
     }
 
