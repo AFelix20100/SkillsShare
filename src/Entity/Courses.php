@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\CoursesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoursesRepository::class)]
@@ -19,30 +18,37 @@ class Courses
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
-    #[ORM\Column(length: 5)]
-    private ?string $duration = null;
+    #[ORM\Column]
+    private ?int $duration = null;
 
     #[ORM\Column(length: 25)]
     private ?string $difficulty = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $updateAt = null;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\OneToMany(mappedBy: 'courses', targetEntity: Chapter::class, orphanRemoval: true)]
-    private Collection $Chapter;
+    private Collection $chapters;
 
     #[ORM\ManyToOne(inversedBy: 'courses')]
     private ?Category $category = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $img = null;
+
+    public const DIFFICULTY_EASY = "Facile";
+    public const DIFFICULTY_AVERAGE = "Moyenne";
+    public const DIFFICULTY_HARD = "Difficile";
+
     public function __construct()
     {
-        $this->Chapter = new ArrayCollection();
+        $this->chapters = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -74,18 +80,6 @@ class Courses
         return $this;
     }
 
-    public function getDuration(): ?string
-    {
-        return $this->duration;
-    }
-
-    public function setDuration(string $duration): static
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
-
     public function getDifficulty(): ?string
     {
         return $this->difficulty;
@@ -105,19 +99,19 @@ class Courses
 
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->createdAt = getdate($createdAt);
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdateAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updateAt;
+        return $this->updatedAt;
     }
 
-    public function setUpdateAt(\DateTimeInterface $updateAt): static
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): static
     {
-        $this->updateAt = getdate($updateAt);
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -125,15 +119,15 @@ class Courses
     /**
      * @return Collection<int, Chapter>
      */
-    public function getChapter(): Collection
+    public function getChapters(): Collection
     {
-        return $this->Chapter;
+        return $this->chapters;
     }
 
     public function addChapter(Chapter $chapter): static
     {
-        if (!$this->Chapter->contains($chapter)) {
-            $this->Chapter->add($chapter);
+        if (!$this->chapters->contains($chapter)) {
+            $this->chapters->add($chapter);
             $chapter->setCourses($this);
         }
 
@@ -142,7 +136,7 @@ class Courses
 
     public function removeChapter(Chapter $chapter): static
     {
-        if ($this->Chapter->removeElement($chapter)) {
+        if ($this->chapters->removeElement($chapter)) {
             // set the owning side to null (unless already changed)
             if ($chapter->getCourses() === $this) {
                 $chapter->setCourses(null);
@@ -160,6 +154,30 @@ class Courses
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): static
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): static
+    {
+        $this->img = $img;
 
         return $this;
     }

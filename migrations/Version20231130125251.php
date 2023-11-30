@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20231129182135 extends AbstractMigration
+final class Version20231130125251 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,8 +24,8 @@ final class Version20231129182135 extends AbstractMigration
         $this->addSql('CREATE TABLE chapter (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, courses_id INTEGER NOT NULL, title VARCHAR(100) NOT NULL, video_url CLOB DEFAULT NULL, content CLOB NOT NULL, created_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
         , updated_at DATETIME NOT NULL, CONSTRAINT FK_F981B52EF9295384 FOREIGN KEY (courses_id) REFERENCES courses (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
         $this->addSql('CREATE INDEX IDX_F981B52EF9295384 ON chapter (courses_id)');
-        $this->addSql('CREATE TABLE courses (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, category_id INTEGER DEFAULT NULL, title VARCHAR(255) NOT NULL, description CLOB NOT NULL, duration VARCHAR(5) NOT NULL, difficulty VARCHAR(25) NOT NULL, created_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
-        , update_at DATETIME NOT NULL, CONSTRAINT FK_A9A55A4C12469DE2 FOREIGN KEY (category_id) REFERENCES category (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
+        $this->addSql('CREATE TABLE courses (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, category_id INTEGER DEFAULT NULL, title VARCHAR(255) NOT NULL, description CLOB NOT NULL, duration INTEGER NOT NULL, difficulty VARCHAR(25) NOT NULL, created_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
+        , updated_at DATETIME NOT NULL, img VARCHAR(255) NOT NULL, CONSTRAINT FK_A9A55A4C12469DE2 FOREIGN KEY (category_id) REFERENCES category (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
         $this->addSql('CREATE INDEX IDX_A9A55A4C12469DE2 ON courses (category_id)');
         $this->addSql('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles CLOB NOT NULL --(DC2Type:json)
         , password VARCHAR(255) NOT NULL, create_at DATETIME NOT NULL)');

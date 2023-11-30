@@ -432,3 +432,8 @@
     padding-right: 0;
     border-right: none;
 }
+
+form[name="registration_form"] div.row div:nth-child(3){
+    display: flex;
+    gap: 1rem;
+}
