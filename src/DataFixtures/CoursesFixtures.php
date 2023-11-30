@@ -8,6 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use DateTime;
+use DateTimeImmutable;
 
 class CoursesFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -20,19 +21,63 @@ class CoursesFixtures extends Fixture implements DependentFixtureInterface
                 "Installez, configurez & administrez un système Windows Server 2019. Mettez votre système en réseau, déployez des serveurs DHCP & DNS & utilisez WSUS, Hyper-V & PowerShell", 
                 6, 
                 Courses::DIFFICULTY_EASY,
-                4,
+                5,
+                "https://oc-course.imgix.net/courses/2356306/2356306_teaser_picture_1680854428.jpg?auto=compress,format&q=80"
+            ],
+            [
+                "Créez votre site web avec HTML5 et CSS3", 
+                "Vous rêvez d'apprendre à créer des sites web ? Débutez avec ce cours qui vous enseignera tout ce qu'il faut savoir sur le développement de sites web en HTML5 et CSS3 !", 
+                15, 
+                Courses::DIFFICULTY_EASY,
+                7,
+                "https://oc-course.imgix.net/courses/1603881/1603881_teaser_picture_1680854710.jpg?auto=compress,format&q=80"
+            ],
+            [
+                "Apprenez à programmer avec JavaScript", 
+                "Maîtrisez les bases de la programmation JavaScript et sa logique de programmation en réalisant un site web dynamique.", 
+                12, 
+                Courses::DIFFICULTY_HARD,
+                7,
+                "https://oc-course.imgix.net/courses/7696886/7696886_teaser_picture_1684221736.jpg?auto=compress,format&q=80"
+            ],
+            [
+                "Découvrez l'univers de la cybersécurité", 
+                "Installez, configurez & administrez un système Windows Server 2019. Mettez votre système en réseau, déployez des serveurs DHCP & DNS & utilisez WSUS, Hyper-V & PowerShell", 
+                8, 
+                Courses::DIFFICULTY_HARD,
+                2,
+                "https://oc-course.imgix.net/courses/6900101/6900101_teaser_picture_1680858599.jpg?auto=compress,format&q=80"
+            ],
+            [
+                "Initiez-vous au Machine Learning", 
+                "Découvrez le Machine Learning et ses différentes techniques (régression linéaire, classification non supervisée...). Vous verrez comment un algorithme apprend pour résoudre un problème de Data Science, et vous entrainerez votre premier modèle !", 
+                30, 
+                Courses::DIFFICULTY_HARD,
+                3,
+                "https://oc-course.imgix.net/courses/6417031/6417031_teaser_picture_1684742698.jpg?auto=compress,format&q=80"
+            ],
+            [
+                "Augmentez votre trafic grâce au référencement naturel (SEO)", 
+                "Décuplez le trafic de votre site web grâce au référencement naturel. Construisez une stratégie SEO intégrée à la stratégie marketing.", 
+                10, 
+                Courses::DIFFICULTY_AVERAGE,
+                6,
+                "https://oc-course.imgix.net/courses/5561431/5561431_teaser_picture_1680857670.jpg?auto=compress,format&q=80"
             ]
         ];
 
         foreach ($data as $oneCourse) 
         {
             $course = new Courses();
-            $course->setCreatedAt(new DateTime("now"));
+            $course->setCreatedAt(new DateTimeImmutable("now"));
+            $course->setUpdatedAt(new DateTimeImmutable("now"));
             $course->setTitle($oneCourse[0]);
             $course->setDescription($oneCourse[1]);
             $course->setDuration($oneCourse[2]);
             $course->setDifficulty($oneCourse[3]);
             $course->setCategory($manager->getRepository(Category::class)->findOneBy(["id" => $oneCourse[4]]));
+            $course->setImg($oneCourse[5]);
+            $manager->persist($course);
         }
         $manager->flush();
     }
