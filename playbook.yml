@@ -1,0 +1,141 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+      ignore_errors: yes
+
+    - name: Install Ansible's MySQL dependency
+      apt:
+        name: python3-mysqldb
+        state: latest
+
+    - name: Install common dependencies
+      apt:
+        name:
+          - lsb-release
+          - ca-certificates
+          - apt-transport-https
+          - software-properties-common
+          - unzip
+          - curl
+        state: latest
+
+    - name: Add PHP repository
+      apt_repository:
+        repo: ppa:ondrej/php
+        state: present
+
+    - name: Install PHP and its extensions
+      apt:
+        name:
+          - php8.2
+          - php8.2-cli
+          - php8.2-common
+          - php8.2-mysql
+          - php8.2-mbstring
+          - php8.2-xml
+          - php8.2-dom
+          - php8.2-intl
+        state: latest
+
+    - name: Install Composer
+      shell: "{{ item }}"
+      loop:
+        - "curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php"
+        - "HASH=`curl -sS https://composer.github.io/installer.sig`"
+        - "php -r \"if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('/tmp/composer-setup.php'); } echo PHP_EOL;\""
+        - "php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer"
+
+    - name: Install MariaDB
+      apt:
+        name: mariadb-server
+        state: latest
+
+    - name: Create SkillsShare database
+      mysql_db:
+        name: skillsshare
+        state: present
+
+    - name: Create user
+      mysql_user:
+        name: root
+        password: root
+        state: present
+        priv: "root.*:ALL"
+
+    - name: Restart MariaDB
+      service:
+        name: mysql
+        state: restarted
+
+    - name: Install Git
+      apt:
+        name: git
+        state: latest
+
+    - name: Clone repository
+      git:
+        repo: https://github.com/AFelix20100/SkillsShare.git
+        dest: /var/www/SkillsShare
+      ignore_errors: yes
+
+    - name: Set up permissions on var/
+      file:
+        path: "/var/www/SkillsShare/var"
+        owner: www-data
+        group: www-data
+        mode: '0775'
+        recurse: yes
+
+    - name: Composer install
+      shell:
+        cmd: composer install
+        chdir: /var/www/SkillsShare
+      environment:
+        COMPOSER_ALLOW_SUPERUSER: "1"
+      ignore_errors: yes
+
+    - name: Setting up prod environment
+      lineinfile:
+        path: "/var/www/SkillsShare/.env"
+        regexp: "^APP_ENV="
+        line: "APP_ENV=prod"
+
+    - name: Configure database connection
+      lineinfile:
+        path: "/var/www/SkillsShare/.env"
+        regexp: "^DATABASE_URL="
+        line: "DATABASE_URL=\"mysql://root:root@127.0.0.1:3306/skillsshare\""
+
+    - name: Migrate database
+      shell:
+        cmd: "php bin/console doctrine:migrations:migrate --no-interaction"
+        chdir: /var/www/SkillsShare
+
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: latest
+
+    - name: Enable Apache's mod_rewrite module
+      apache2_module:
+        state: present
+        name: rewrite
+
+    - name: Set up Apache virtual host
+      template:
+        src: "files/skillsshare.conf"
+        dest: "/etc/apache2/sites-available/skillsshare.conf"
+
+    - name: Disable default Apache site
+      shell: "/usr/sbin/a2dissite 000-default"
+
+    - name: Enable SkillsShare site
+      shell: "/usr/sbin/a2ensite skillsshare"
+
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted

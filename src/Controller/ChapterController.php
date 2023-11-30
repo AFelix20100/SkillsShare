@@ -7,9 +7,12 @@ use App\Entity\Chapter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 class ChapterController extends AbstractController
 {
+    #[IsGranted("ROLE_USER")]
     #[Route('/chapter/list', name: 'app_chapter')]
     public function index(): Response
     {
@@ -18,14 +21,11 @@ class ChapterController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_ENSEIGNANT")]
     #[Route('/chapter/new', name: "new_chapter")]
     public function new(): Response
     {
         $chapter = new Chapter();
-        $form = $this->createFormBuilder($chapter)
-        ->add('titre', TextType::class)
-        ->add('Video URL', TextType::class)
-        ->add('contenu', TextType::class);
         return $this->render('chapter/index.html.twig', [
             'controller_name' => 'ChapterController',
         ]);

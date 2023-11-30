@@ -197,7 +197,7 @@
 }
 
 .page-header {
-    background: linear-gradient(rgba(24, 29, 56, .7), rgba(24, 29, 56, .7)), url(../img/carousel-1.jpg);
+    background: linear-gradient(rgba(24, 29, 56, .7), rgba(24, 29, 56, .7)), url(../asset/fond.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -436,4 +436,8 @@
 form[name="registration_form"] div.row div:nth-child(3){
     display: flex;
     gap: 1rem;
+}
+
+div.team-item{
+    height: 100%;
 }

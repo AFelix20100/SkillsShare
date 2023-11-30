@@ -61,13 +61,13 @@ Notre entreprise s'est récemment vue confier une mission des plus captivantes p
 The following tools were used in this project:
 
 - [PHP 8.2](https://www.php.net/downloads)
-- [Symfony](https://symfony.com/download)
-- [Composer](https://getcomposer.org/download/)
+- [Symfony 6](https://symfony.com/download)
+- [Composer 2.6](https://getcomposer.org/download/)
 - [Boostrap V5](https://getbootstrap.com/)
 
 ## :white_check_mark: Requirements ##
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+Avant de commencer il faut avoir PHP, Composer, Symfony CLI d'installés.
 
 ## :checkered_flag: Starting ##
 
@@ -79,12 +79,18 @@ $ git clone https://github.com/{{AFelix20100}}/skillsshare
 $ cd skillsshare
 
 # Install dependencies
-$ php bin/console migrations:migrate
+$ composer install
+
+# Création des tables
+$ php bin/console doctrine:migrations:migrate
+
+# Jeux de données
+$ php bin/console doctrine:fixtures:load
 
 # Run the project
-$ yarn start
+$ symfony server:start
 
-# The server will initialize in the <http://localhost:3000>
+# Le serveur est accessible sur <http://localhost:8000>
 ```
 ## Git ##
 Pour récupérer une branche spécifique d'un dépôt Git, vous pouvez utiliser la commande git clone suivie de l'option --branch pour spécifier le nom de la branche que vous souhaitez cloner. Voici comment cela se présente :
