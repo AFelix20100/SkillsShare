@@ -23,7 +23,7 @@ class ChapterFormType extends AbstractType
                 'class' => Courses::class,
 
                 // uses the User.username property as the visible option string
-                'choice_label' => 'chapter',
+                'choice_label' => 'chapters',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',

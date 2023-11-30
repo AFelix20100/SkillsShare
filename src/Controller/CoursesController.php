@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Courses;
 use App\Entity\Category;
+use App\Form\CourseFormType;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +23,33 @@ class CoursesController extends AbstractController
         return $this->render('courses/index.html.twig',
         [
             "courses" => $courses,
+        ]);
+    }
+
+    #[Route('/courses/new', name: 'new_course')]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $courses = new Courses();
+        $form = $this->createForm(CourseFormType::class, $courses);
+        $form->handleRequest($request);
+        
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $coursesData =$form->getData();
+            $courses->setTitle($coursesData->getTitle());
+            $courses->setDescription($coursesData->getDescription());
+            $courses->setDuration($coursesData->getDuration());
+            $courses->setDifficulty($coursesData->getDifficulty());
+            $courses->setCreatedAt(new DateTimeImmutable());
+            $courses->setUpdatedAt(new DateTime());
+            dd($courses);
+            $entityManager->persist($courses);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_courses');
+         }
+        return $this->render('courses/new.html.twig', [
+            'coursesForm' => $form->createView(),
         ]);
     }
    
