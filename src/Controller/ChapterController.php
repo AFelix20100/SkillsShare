@@ -17,9 +17,6 @@ class ChapterController extends AbstractController
 {
     #[Route('/chapter', name: 'app_chapter')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
-    #[IsGranted("ROLE_USER")]
-    #[Route('/chapter/list', name: 'app_chapter')]
-    public function index(): Response
     {
         $chapter = $entityManager->getRepository(Chapter::class)->findAll();
         return $this->render('chapter/index.html.twig', [
