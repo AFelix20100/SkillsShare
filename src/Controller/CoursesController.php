@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Courses;
 use App\Form\CourseFormType;
 use App\Form\RegistrationFormType;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 // use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,8 +36,11 @@ class CoursesController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()) {
             $courses = $form->getData();
-            dd($courses, $form);
-
+            $courses->setCreatedAt(new DateTimeImmutable("now"));
+            $courses->setUpdateAt(new DateTimeImmutable("now"));
+            $entityManager->persist($courses);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_courses');
         }
 
         return $this->render('courses/new.html.twig', [

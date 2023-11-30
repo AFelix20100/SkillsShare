@@ -105,7 +105,7 @@ class Courses
 
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->createdAt = getdate($createdAt);
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -117,7 +117,7 @@ class Courses
 
     public function setUpdateAt(\DateTimeInterface $updateAt): static
     {
-        $this->updateAt = getdate($updateAt);
+        $this->updateAt = $updateAt;
 
         return $this;
     }
