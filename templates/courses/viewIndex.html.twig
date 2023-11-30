@@ -8,7 +8,7 @@
 		<div class="container py-5">
 			<div class="row justify-content-center">
 				<div class="col-lg-10 text-center">
-					<h1 class="display-3 text-white animated slideInDown">Lorem ipsum</h1>
+					<h1 class="display-3 text-white animated slideInDown">{{course.title}}</h1>
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb justify-content-center">
 							<li class="breadcrumb-item">
@@ -31,20 +31,18 @@
 	<div class="container-xxl py-5 category">
 		<div class="container">
 			<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-				<h6 class="section-title bg-white text-center text-primary px-3">Cours de Lorem ipsum</h6>
-				<h1 class="mb-5">Lorem ipsum</h1>
+				<h6 class="section-title bg-white text-center text-primary px-3">{{course.category.label}}</h6>
+				<h1 class="mb-5">{{course.title}}</h1>
 			</div>
-			<div class="description row g-5">
-				<div class="col-lg-6 col-md-6 animated slideInLeft">
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/keyRM3h_7tk?si=QPtzyBGRaubcJUU1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-				</div>
-				<div class="col-lg-6 col-md-6 d-flex align-items-center animated slideInRight">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-																								                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-																								                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa 
-																								                    qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-			</div>
+            <div class="description row g-5">
+                <div class="col-lg-6 col-md-6">
+					<img style="width: 560px; height: 315px;" src="{{ course.img }}" alt="">
+					{# <iframe width="560" height="315" src="https://www.youtube.com/embed/keyRM3h_7tk?si=QPtzyBGRaubcJUU1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                </div> #}
+                </div>
+				<div class="col-lg-6 col-md-6 d-flex align-items-center">
+                    <p>{{course.description}}</p>
+                </div>
+            </div>
 			<div class="accordion mt-5" id="accordionExample">
 				<div class="accordion-item">
 					<h2 class="accordion-header">
