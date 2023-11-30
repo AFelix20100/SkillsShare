@@ -95,7 +95,8 @@ This project is under license from MIT. For more details, see the [LICENSE](LICE
 Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
 
 &#xa0;
-#Git 
+
+# Git 
 Pour récupérer une branche spécifique d'un dépôt Git, vous pouvez utiliser la commande git clone suivie de l'option --branch pour spécifier le nom de la branche que vous souhaitez cloner. Voici comment cela se présente :
 commande: git clone --branch <nom_de_la_branche> <URL_du_dépôt>
 
