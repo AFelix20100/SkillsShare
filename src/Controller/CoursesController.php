@@ -22,4 +22,11 @@ class CoursesController extends AbstractController
             'controller_name' => 'CoursesController',
         ]);
     }
+    #[Route('/view', name: 'app_viewCourses')]
+    public function ViewCourses(): Response
+    {
+        return $this->render('courses/viewIndex.html.twig', [
+            'controller_name' => 'CoursesController',
+        ]);
+    }
 }
