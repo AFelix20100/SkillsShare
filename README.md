@@ -97,3 +97,23 @@ Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" targe
 &#xa0;
 
 <a href="#top">Back to top</a>
+
+##Git 
+Pour récupérer une branche spécifique d'un dépôt Git, vous pouvez utiliser la commande git clone suivie de l'option --branch pour spécifier le nom de la branche que vous souhaitez cloner. Voici comment cela se présente :
+
+git clone --branch <nom_de_la_branche> <URL_du_dépôt>
+
+##Docker
+Docker est une plateforme logicielle qui simplifie le déploiement et la gestion d'applications dans des environnements isolés appelés conteneurs. Ces conteneurs offrent un moyen portable et léger d'emballer des applications avec toutes leurs dépendances, garantissant ainsi une exécution cohérente indépendamment de l'environnement hôte.
+
+Les conteneurs Docker fonctionnent sur la base d'images, des modèles immuables et auto-suffisants qui contiennent le code, les bibliothèques, les outils, et toutes les autres dépendances nécessaires à l'exécution d'une application.
+
+Maintenant, voici quelques commandes essentielles pour travailler avec Docker :
+
+    docker-compose up -d : Cette commande lance des services définis dans un fichier docker-compose.yml. Elle crée et démarre des conteneurs en fonction de la configuration spécifiée.
+
+    docker-compose down: Ceci arrête et supprime les conteneurs, les réseaux, les volumes et les images créés par docker-compose up.
+
+    docker ps: Cette commande affiche les conteneurs actuellement en cours d'exécution avec des informations telles que leur ID, leur nom et leur statut.
+
+    docker exec -it <container_id> /bin/bash: Vous permet de vous connecter à l'intérieur d'un conteneur en cours d'exécution pour exécuter des commandes ou effectuer des opérations dans son environnement.
