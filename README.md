@@ -113,13 +113,13 @@ $ sudo docker exec -it <container_id> /bin/bash
 ```
 ## Processus avec Docker ##
 1. Cloner le dépôt Git :
-      Commencez par récupérer le dépôt Git avec la commande ```bash sudo git clone --branch <nom_de_la_branche> <URL_du_dépôt>```
+      Commencez par récupérer le dépôt Git avec la commande ``` $sudo git clone --branch <nom_de_la_branche> <URL_du_dépôt>```
    
 2. Transférer le fichier compressé vers le serveur web :
      Une fois le dépôt cloné, transférez le fichier compressé siteweb.zip vers le serveur web.
    
 3. Décompresser le fichier à la racine du serveur :
-     Utilisez la commande ``` $sudo apt install unzip``` ensuite ```bash $sudo unzip siteweb.zip -d /home/debian && sudo mv /home/debian/siteweb/* /home/debian/ && sudo rm -r /home/debian/siteweb ```
+     Utilisez la commande ``` $sudo apt install unzip``` ensuite ``` $sudo unzip siteweb.zip -d /home/debian && sudo mv /home/debian/siteweb/* /home/debian/ && sudo rm -r /home/debian/siteweb ```
  pour extraire le contenu du fichier siteweb.zip dans la racine du système. Assurez-vous d'avoir les permissions nécessaires pour écrire à la racine du système. ensuite rentrer dans le dossier site web et faite la commande.
    
 4. Placer les fichiers spécifiques au bon endroit :
