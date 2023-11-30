@@ -12,6 +12,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ChapterController extends AbstractController
 {
+    #[IsGranted("ROLE_USER")]
     #[Route('/chapter/list', name: 'app_chapter')]
     public function index(): Response
     {
