@@ -22,12 +22,12 @@ class Courses
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 5)]
-    private ?string $duration = null;
+    #[ORM\Column]
+    private ?int $duration = null;
 
     #[ORM\Column(length: 25)]
     private ?string $difficulty = null;
-
+    
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -39,6 +39,11 @@ class Courses
 
     #[ORM\ManyToOne(inversedBy: 'courses')]
     private ?Category $category = null;
+
+
+    public const DIFFICULTY_EASY = "Facile";
+    public const DIFFICULTY_AVERAGE = "Moyenne";
+    public const DIFFICULTY_HARD = "Difficile";
 
     public function __construct()
     {
@@ -74,17 +79,6 @@ class Courses
         return $this;
     }
 
-    public function getDuration(): ?string
-    {
-        return $this->duration;
-    }
-
-    public function setDuration(string $duration): static
-    {
-        $this->duration = $duration;
-
-        return $this;
-    }
 
     public function getDifficulty(): ?string
     {
@@ -103,7 +97,7 @@ class Courses
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt($createdAt): static
     {
         $this->createdAt = getdate($createdAt);
 
@@ -115,7 +109,7 @@ class Courses
         return $this->updateAt;
     }
 
-    public function setUpdateAt(\DateTimeInterface $updateAt): static
+    public function setUpdateAt($updateAt): static
     {
         $this->updateAt = getdate($updateAt);
 
@@ -160,6 +154,18 @@ class Courses
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): static
+    {
+        $this->duration = $duration;
 
         return $this;
     }

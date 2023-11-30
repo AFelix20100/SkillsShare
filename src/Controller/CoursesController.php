@@ -16,6 +16,7 @@ class CoursesController extends AbstractController
         $courses = $entityManager->getRepository(Courses::class)->findAll();
         return $this->render('courses/index.html.twig', 
         [
+            "courses" => $courses,
         ]);
     }
     #[Route('/categories', name: 'app_categories')]
