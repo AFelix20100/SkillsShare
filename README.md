@@ -98,19 +98,19 @@ Docker est une plateforme logicielle qui simplifie le déploiement et la gestion
 Les conteneurs Docker fonctionnent sur la base d'images, des modèles immuables et auto-suffisants qui contiennent le code, les bibliothèques, les outils, et toutes les autres dépendances nécessaires à l'exécution d'une application.
 
 Maintenant, voici quelques commandes essentielles pour travailler avec Docker :
-
-$sudo docker-compose up 
+```bash
+$ sudo docker-compose up 
 #Cette commande lance des services définis dans un fichier docker-compose.yml. Elle crée et démarre des conteneurs en fonction de la configuration spécifiée.
 
-$sudo docker-compose down
+$ sudo docker-compose down
 #Ceci arrête et supprime les conteneurs, les réseaux, les volumes et les images créés par docker-compose up.
 
-$sudo docker ps 
+$ sudo docker ps 
 #Cette commande affiche les conteneurs actuellement en cours d'exécution avec des informations telles que leur ID, leur nom et leur statut.
 
-$sudo docker exec -it <container_id> /bin/bash 
+$ sudo docker exec -it <container_id> /bin/bash 
 #Vous permet de vous connecter à l'intérieur d'un conteneur en cours d'exécution pour exécuter des commandes ou effectuer des opérations dans son environnement.
-
+```
 ## :memo: License ##
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
