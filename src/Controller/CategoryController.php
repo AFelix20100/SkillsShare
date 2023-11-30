@@ -13,7 +13,7 @@ class CategoryController extends AbstractController
 {
 
     #[Route('/categories', name: 'app_categories')]
-    public function ShowCategories(EntityManagerInterface $entityManager): Response
+    public function showCategories(EntityManagerInterface $entityManager): Response
     {
         $categories = $entityManager->getRepository(Category::class)->findAll();
         return $this->render('category/index.html.twig', 
@@ -21,4 +21,6 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
+
+    
 }
