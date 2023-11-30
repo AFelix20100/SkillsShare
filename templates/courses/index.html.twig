@@ -35,7 +35,7 @@
             {% if courses is defined %}
 				{% for course in courses %}
 					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-						<a href="{{ path('app_viewCourses')}}">
+						<a href="{{ path('app_viewCourses',{id: course.id})}}">
 							<div class="team-item bg-light">
 								<div class="overflow-hidden">
 									<img class="img-fluid" src="{{course.img}}" alt="">
