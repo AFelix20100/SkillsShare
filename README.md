@@ -113,10 +113,6 @@ Maintenant, voici quelques commandes essentielles pour travailler avec Docker :
     docker ps: Cette commande affiche les conteneurs actuellement en cours d'exécution avec des informations telles que leur ID, leur nom et leur statut.
 
     docker exec -it <container_id> /bin/bash: Vous permet de vous connecter à l'intérieur d'un conteneur en cours d'exécution pour exécuter des commandes ou effectuer des opérations dans son environnement.
+
+    
 <a href="#top">Back to top</a>
-
-
-
-    docker ps: Cette commande affiche les conteneurs actuellement en cours d'exécution avec des informations telles que leur ID, leur nom et leur statut.
-
-    docker exec -it <container_id> /bin/bash: Vous permet de vous connecter à l'intérieur d'un conteneur en cours d'exécution pour exécuter des commandes ou effectuer des opérations dans son environnement.
