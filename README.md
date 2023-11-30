@@ -86,8 +86,6 @@ $ yarn start
 
 # The server will initialize in the <http://localhost:3000>
 ```
-
-
 ## Git ##
 Pour récupérer une branche spécifique d'un dépôt Git, vous pouvez utiliser la commande git clone suivie de l'option --branch pour spécifier le nom de la branche que vous souhaitez cloner. Voici comment cela se présente :
 commande: git clone --branch <nom_de_la_branche> <URL_du_dépôt>
