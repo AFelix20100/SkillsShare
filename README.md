@@ -117,7 +117,8 @@ $ sudo docker exec -it <container_id> /bin/bash
 2. Transférer le fichier compressé vers le serveur web :
      Une fois le dépôt cloné, transférez le fichier compressé siteweb.zip vers le serveur web.
 3. Décompresser le fichier à la racine du serveur :
-     Utilisez la commande sudo unzip siteweb.zip -d / pour extraire le contenu du fichier siteweb.zip dans la racine du système. Assurez-vous d'avoir les permissions nécessaires pour écrire à la racine du système.
+     Utilisez la commande $ sudo apt install unzip ensuite $ sudo unzip siteweb.zip -d /home/debian && sudo mv /home/debian/siteweb/* /home/debian/ && sudo rm -r /home/debian/siteweb
+ pour extraire le contenu du fichier siteweb.zip dans la racine du système. Assurez-vous d'avoir les permissions nécessaires pour écrire à la racine du système. ensuite rentrer dans le dossier site web et faite la commande.
    
 4. Placer les fichiers spécifiques au bon endroit :
      Vérifiez que les fichiers apache-config.conf, docker-compose.yml et Dockerfile sont extraits dans le même répertoire (la racine du serveur). Ces fichiers doivent être situés au même endroit pour leur bon fonctionnement.
