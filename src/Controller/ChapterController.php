@@ -13,9 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ChapterController extends AbstractController
 {
-    #[Route('/chapter/list', name: 'app_chapter')]
-    public function index(): Response
+    #[Route('/chapter', name: 'app_chapter')]
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $chapter = $entityManager->getRepository(Chapter::class)->findAll();
         return $this->render('chapter/index.html.twig', [
             'controller_name' => 'ChapterController',
         ]);
