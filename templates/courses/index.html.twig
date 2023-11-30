@@ -38,11 +38,11 @@
 						<a href="{{ path('app_viewCourses')}}">
 							<div class="team-item bg-light">
 								<div class="overflow-hidden">
-									<img class="img-fluid" src="https://oc-course.imgix.net/courses/7168871/7168871_teaser_picture_1687249906.jpg?auto=compress,format&q=80" alt="">
+									<img class="img-fluid" src="{{course.img}}" alt="">
 								</div>
 								<div class="text-center p-4">
-									<h5 class="mb-0">Instructor Name</h5>
-									<small>Designation</small>
+									<h5 class="mb-0">{{course.title}}</h5>
+									<small>{{course.category.label}}</small>
 								</div>
 							</div>
 						</a>
