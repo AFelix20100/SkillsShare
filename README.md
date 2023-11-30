@@ -87,20 +87,12 @@ $ yarn start
 # The server will initialize in the <http://localhost:3000>
 ```
 
-## :memo: License ##
 
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
-
-
-Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
-
-&#xa0;
-
-# Git 
+## Git ##
 Pour récupérer une branche spécifique d'un dépôt Git, vous pouvez utiliser la commande git clone suivie de l'option --branch pour spécifier le nom de la branche que vous souhaitez cloner. Voici comment cela se présente :
 commande: git clone --branch <nom_de_la_branche> <URL_du_dépôt>
 
-# Avec Docker 
+## Avec Docker ##
 Docker est une plateforme logicielle qui simplifie le déploiement et la gestion d'applications dans des environnements isolés appelés conteneurs. Ces conteneurs offrent un moyen portable et léger d'emballer des applications avec toutes leurs dépendances, garantissant ainsi une exécution cohérente indépendamment de l'environnement hôte.
 
 Les conteneurs Docker fonctionnent sur la base d'images, des modèles immuables et auto-suffisants qui contiennent le code, les bibliothèques, les outils, et toutes les autres dépendances nécessaires à l'exécution d'une application.
@@ -115,5 +107,12 @@ Maintenant, voici quelques commandes essentielles pour travailler avec Docker :
 
     docker exec -it <container_id> /bin/bash: Vous permet de vous connecter à l'intérieur d'un conteneur en cours d'exécution pour exécuter des commandes ou effectuer des opérations dans son environnement.
 
-    
+## :memo: License ##
+
+This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+
+
+Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
+
+&#xa0;
 <a href="#top">Back to top</a>
