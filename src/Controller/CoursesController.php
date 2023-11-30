@@ -3,12 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Courses;
-use App\Form\CourseFormType;
-use App\Form\RegistrationFormType;
-use DateTimeImmutable;
-use Doctrine\ORM\EntityManagerInterface;
-// use Symfony\Component\BrowserKit\Request;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,47 +14,27 @@ class CoursesController extends AbstractController
     public function ShowCourses(EntityManagerInterface $entityManager, Request $request): Response
     {
         $courses = $entityManager->getRepository(Courses::class)->findAll();
-
-        return $this->render('courses/index.html.twig', [
-            'controller_name' => 'CoursesController',
-            'courses' => $courses,
+        return $this->render('courses/index.html.twig', 
+        [
         ]);
     }
-
-    #[Route('/courses/new', name:'app_courses_new')]
-    public function new(EntityManagerInterface $entityManager, Request $request): Response
-    {
-        $courses = new Courses();
-        $form = $this->createForm(CourseFormType::class, $courses);
-
-        $form->handleRequest($request);
-        
-        if($form->isSubmitted() && $form->isValid()) {
-            $courses = $form->getData();
-            $courses->setCreatedAt(new DateTimeImmutable("now"));
-            $courses->setUpdateAt(new DateTimeImmutable("now"));
-            $entityManager->persist($courses);
-            $entityManager->flush();
-            return $this->redirectToRoute('app_courses');
-        }
-
-        return $this->render('courses/new.html.twig', [
-            'coursesForm' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/categories', name: 'app_courses')]
+    #[Route('/categories', name: 'app_categories')]
     public function ShowCategories(): Response
     {
-        return $this->render('courses/categorieIndex.html.twig', [
-            'controller_name' => 'CoursesController',
+        
+        return $this->render('courses/viewIndex.html.twig', 
+        [
+            "course" => $course,
         ]);
     }
-    #[Route('/view', name: 'app_viewCourses')]
-    public function ViewCourses(): Response
+
+    #[Route('/categories/{id}', name: 'app_courses_by_category')]
+    public function showCoursesByCategory(EntityManagerInterface $entityManager, Category $category): Response
     {
-        return $this->render('courses/viewIndex.html.twig', [
-            'controller_name' => 'CoursesController',
+        $courses = $category->getCourses();
+        return $this->render('category/courses_by_categ.html.twig', 
+        [
+            'courses' => $courses,
         ]);
     }
 }
