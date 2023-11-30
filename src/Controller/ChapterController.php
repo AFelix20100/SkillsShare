@@ -26,10 +26,6 @@ class ChapterController extends AbstractController
     public function new(): Response
     {
         $chapter = new Chapter();
-        $form = $this->createFormBuilder($chapter)
-        ->add('titre', TextType::class)
-        ->add('Video URL', TextType::class)
-        ->add('contenu', TextType::class);
         return $this->render('chapter/index.html.twig', [
             'controller_name' => 'ChapterController',
         ]);
