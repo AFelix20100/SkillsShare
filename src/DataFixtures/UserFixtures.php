@@ -8,8 +8,10 @@ use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class UserFixtures extends Fixture
+
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     private UserPasswordHasherInterface $hasher;
 
@@ -43,5 +45,12 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            CoursesFixtures::class,
+        ];
     }
 }
