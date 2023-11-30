@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Chapter;
 use App\Entity\Courses;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -66,6 +67,7 @@ class CoursesFixtures extends Fixture implements DependentFixtureInterface
             ]
         ];
 
+        $chapterData = ["https://www.google.com/url?sa=i&url=https%3A%2F%2Ftenor.com%2Fview%2Fintroduction-gif-26330777&psig=AOvVaw2OJVDJm5Kwq9Jp_PAyD53x&ust=1701441128554000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKDqjaL464IDFQAAAAAdAAAAABAE","Introduction", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi tenetur laborum dolores esse. Nobis tenetur tempore, minima recusandae non sed pariatur quis? Ad tenetur veritatis quo, optio aliquid eveniet est!"];
         foreach ($data as $oneCourse) 
         {
             $course = new Courses();
@@ -77,7 +79,17 @@ class CoursesFixtures extends Fixture implements DependentFixtureInterface
             $course->setDifficulty($oneCourse[3]);
             $course->setCategory($manager->getRepository(Category::class)->findOneBy(["id" => $oneCourse[4]]));
             $course->setImg($oneCourse[5]);
+
+            $chapter = new Chapter();
+            $chapter->setTitle($chapterData[1]);
+            $chapter->setContent($chapterData[2]);
+            $chapter->setCreatedAt(new DateTime("now"));
+            $chapter->setUpdatedAt(new DateTime("now"));
+            $chapter->setCourses($course);
+            $chapter->setVideoUrl($chapterData[0]);
+
             $manager->persist($course);
+            $manager->persist($chapter);
         }
         $manager->flush();
     }

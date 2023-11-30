@@ -10,11 +10,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 class ChapterController extends AbstractController
 {
     #[Route('/chapter', name: 'app_chapter')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
+    #[IsGranted("ROLE_USER")]
+    #[Route('/chapter/list', name: 'app_chapter')]
+    public function index(): Response
     {
         $chapter = $entityManager->getRepository(Chapter::class)->findAll();
         return $this->render('chapter/index.html.twig', [
@@ -22,6 +27,7 @@ class ChapterController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_ENSEIGNANT")]
     #[Route('/chapter/new', name: "new_chapter")]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
